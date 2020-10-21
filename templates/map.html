@@ -1,0 +1,82 @@
+<html>  
+<head>
+<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"type="text/javascript" charset="utf-8"></script>
+<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"type="text/javascript" charset="utf-8"></script>
+
+{{ gmap.js }}
+
+</head>
+<style>
+  body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+  body {font-size: 16px;}
+  
+  
+  .column {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    
+  }
+</style>
+
+<body class="w3-content " style="max-width:1500px;">
+
+  <!-- Header-->
+  <header class="w3-display-container w3-center">
+    
+     
+    
+      <img class="w3-image" src="/static/hero-bg.jpg" alt="Image 1" style="min-width:500px" width="1500" height="1000">
+      <div class="w3-display-left w3-padding w3-hide-small " style="width:35%">
+        <div class="w3-container w3-text-white" id="ParcelInfo">
+          <h2>Click to get the parcel info!!</h2>
+          <p>Select the parcel ID</p>
+          <form action="/getParcelInfo" class="w3-container " style="background-color: rgb(19, 18, 18);" method="post">
+            <input class = "w3-radio w3-black w3-left" type="radio" name="options" id="option1" value="109-02-088" color = w3-green>
+            <label class ="w3-left">109-02-088</label><br>
+            <br><input class = "w3-radio w3-black w3-left" type="radio" name="options" id="option2" value="136-18-117" color = w3-green>
+            <label class ="w3-left">136-18-117</label><br>
+            <br><input class = "w3-radio w3-black w3-left" type="radio" name="options" id="option3" value="109-21-100" color = w3-green>
+            <label class ="w3-left">109-21-100</label><br>
+            <br><input class = "w3-radio w3-black w3-left" type="radio" name="options" id="option4" value="672-06-054" color = w3-green>
+            <label class ="w3-left">672-06-054</label><br>
+            <br><input class = "w3-radio w3-black w3-left" type="radio" name="options" id="option5" value="673-12-062" color = w3-green>
+            <label class ="w3-left">673-12-062</label><br>
+            <button type="submit" class="w3-button w3-block w3-section w3-green w3-round ">Submit</button>
+          
+          </form>
+      </div>
+  
+    </div>
+    </header>
+  
+    <div class="row">
+
+      <div class="column w3-text-white" style="background-color:rgb(12, 12, 12);">
+        <h2>{{heading}}</h2>
+         {%for keys in keyslist%}
+         {%if keys[1] != None%}
+        <p>{{keys[0] + " "+ ":" +" "+ keys[1]}}</p>
+         {%else%}
+             {%if keys[0] == 'parcelid'%}
+               <img class="w3-round w3-padding-small" width="250px" height="200px" src="{{url_for('static', filename='images/' + imagesource)}}"/>
+             {%endif%}
+             
+              <h4>{{keys[0]}}</h4>
+             
+         {%endif%}
+         {%endfor%}
+      </div>
+
+      
+    </div>
+    <h2>{{mapheader}}</h2>
+      {{ gmap.html }}
+
+    
+</body>
+</html>
