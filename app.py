@@ -101,7 +101,7 @@ def handle_parcel():
     keylist = []
     valuelist = []
     endPoint = "http://neocando.case.edu/cando/housingReport/lbxml.jsp?parcel="
-    save_path_file = ".\\result.xml"
+    save_path_file = os.path.join(os.path.curdir, 'result.xml')
     xml_str = ""
     
     parcelId = request.form['options']
@@ -122,15 +122,15 @@ def handle_parcel():
     with open(save_path_file, "w") as f: 
         f.write(BeautifulSoup(xml_str, "xml").prettify())
 
-    with open(".\\result.xml") as fd:
+    with open(os.path.join(os.path.curdir, 'result.xml')) as fd:
         doc = xmltodict.parse(fd.read())
         json_data = json.dumps(doc)
 
-    with open(".\\data.json", "w") as json_file: 
+    with open(os.path.join(os.path.curdir, 'data.json'), "w") as json_file: 
         json_file.write(json_data) 
         json_file.close()
     
-    with open('.\\data.json', 'r') as json_file:
+    with open(os.path.join(os.path.curdir, 'data.json'), 'r') as json_file:
         json_object = json.load(json_file)
 
     list1= printallkeys(json_object)
