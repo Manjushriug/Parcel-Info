@@ -12,7 +12,7 @@ Steps to run the flask app locally
 
 Requirement Spec:
 
-Data Transformation
+Data Transformation:
 Transform the XML streams(End points) and output the data in json format
 
 Presentation:
